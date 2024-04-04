@@ -13,7 +13,9 @@ export type RootDrawerParamList = {
   // NotFound: undefined;
   Login: undefined;
   Category: undefined;
-  CategoryItem: undefined;
+  CategoryItem: { cid: string };
+  Friends: undefined;
+  Profile: undefined;
 };
 
 export type RootDrawerScreenProps<T extends keyof RootDrawerParamList> =
