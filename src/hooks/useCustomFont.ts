@@ -1,35 +1,28 @@
+import { useCallback } from "react";
+
+import ThemeConfig from "@/constants/myTheme";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useCallback, useMemo } from "react";
-
-export const fontNames = {
-  aeonisMedium: "AeonisMedium",
-  aeonisBold: "AeonisBold",
-  aeonisBoldExtended: "AeonisBoldExtended",
-  aeonisExtended: "AeonisExtended",
-  montserrat: "Montserrat",
-} as const;
 
 SplashScreen.preventAutoHideAsync();
 
 export const useCustomFont = () => {
+  const theme = ThemeConfig();
   const [fontsLoaded, fontError] = useFonts({
-    [fontNames.aeonisMedium]: require("../../assets/fonts/AeonisMedium.ttf"),
-    [fontNames.aeonisBold]: require("../../assets/fonts/AeonisBold.ttf"),
-    [fontNames.aeonisBoldExtended]: require("../../assets/fonts/AeonisBoldExtended.ttf"),
-    [fontNames.aeonisExtended]: require("../../assets/fonts/AeonisExtended.ttf"),
-    [fontNames.montserrat]: require("../../assets/fonts/Montserrat.otf"),
+    [theme.aeonisMedium]: require("@@/assets/fonts/AeonisMedium.ttf"),
+    [theme.aeonisBold]: require("@@/assets/fonts/AeonisBold.ttf"),
+    [theme.aeonisBoldExtended]: require("@@/assets/fonts/AeonisBoldExtended.ttf"),
+    [theme.aeonisExtended]: require("@@/assets/fonts/AeonisExtended.ttf"),
+    [theme.montserrat]: require("@@/assets/fonts/Montserrat.otf"),
   });
 
+  console.log(fontsLoaded, fontError);
+
   const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
+    if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
 
-  console.log(fontError, "fontErro");
-
-  return useMemo(() => {
-    return { fontsLoaded, onLayoutRootView };
-  }, [fontsLoaded, onLayoutRootView]);
+  return { fontsLoaded, fontError, onLayoutRootView };
 };

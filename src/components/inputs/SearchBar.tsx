@@ -1,5 +1,5 @@
-import { View, Text, TextInput } from "react-native";
 import React, { useState } from "react";
+import { TextInput, View } from "react-native";
 import { MagnifyingGlassIcon } from "react-native-heroicons/solid";
 
 const SearchBar = () => {
@@ -15,7 +15,7 @@ const SearchBar = () => {
 
       <View className="flex-1">
         <TextInput
-          className="w-full py-2 text-lg "
+          className="w-full py-2 text-lg font-montserrat "
           onChangeText={setQuery}
           value={query}
           placeholder="Search"

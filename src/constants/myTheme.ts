@@ -1,4 +1,4 @@
-import { hexToRgb } from "../utils/utils";
+import { hexToRgb } from "@/utils/utils";
 
 class ColorMode {
   lightMode: string;
@@ -38,16 +38,26 @@ export const Colors = {
   accent: new ColorMode("#00ADEE"),
   basicGrey: new ColorMode("#929497"),
   lightBlue: new ColorMode("#3FB0DB"),
+  lightGrey: new ColorMode("#A6A8AB"),
 };
 
 export const fontSizes = {
   lg: 18,
 };
 
+export const fontNames = {
+  aeonisMedium: "AeonisMedium",
+  aeonisBold: "AeonisBold",
+  aeonisBoldExtended: "AeonisBoldExtended",
+  aeonisExtended: "AeonisExtended",
+  montserrat: "Montserrat",
+} as const;
+
 const ThemeConfig = () => {
   return {
     ...Colors,
     ...fontSizes,
+    ...fontNames,
   };
 };
 

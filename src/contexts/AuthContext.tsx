@@ -1,8 +1,13 @@
-import { PropsWithChildren } from "react";
-import { createContext, useContext } from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth, { UserType } from "@/hooks/useAuth";
+import { PropsWithChildren, createContext, useContext } from "react";
 
-const AuthContext = createContext({
+type AuthContextType = {
+  isLoggedIn: boolean;
+  user: UserType;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
+};
+const AuthContext = createContext<AuthContextType>({
   isLoggedIn: false,
   user: null,
   login: async () => {},

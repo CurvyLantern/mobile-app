@@ -1,8 +1,7 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
-import React from "react";
-import { useDrawerStatus } from "@react-navigation/drawer";
+import { RootDrawerNavigationProp } from "@/types/navigation.types";
 import { useNavigation } from "@react-navigation/native";
-import { RootDrawerNavigationProp } from "../../../src/types/navigation.types";
+import React from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 
 const MenuButton = () => {
   const navigation = useNavigation<RootDrawerNavigationProp>();

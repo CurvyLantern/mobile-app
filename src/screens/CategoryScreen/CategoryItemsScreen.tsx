@@ -1,32 +1,34 @@
+import BasicAppHeader from "@/components/headers/BasicAppHeader";
+import Triangle from "@/components/ui/shapes/Triangle";
+import { RootDrawerScreenProps } from "@/types/navigation.types";
+import clsx from "clsx";
+import React, { useState } from "react";
 import {
-  View,
-  Text,
   Image,
-  ScrollView,
   Pressable,
+  ScrollView,
   StyleSheet,
+  Text,
+  View,
 } from "react-native";
-import React, { useDebugValue, useState } from "react";
-import SafeAreaContainer from "../../../components/SafeAreaContainer";
 import {
   ClockIcon,
   XMarkIcon as CrossIcon,
   EllipsisHorizontalIcon as ThreeDotsIcon,
 } from "react-native-heroicons/solid";
-import { Path, Svg } from "react-native-svg";
-import clsx from "clsx";
-import BasicAppHeader from "../../../components/headers/BasicAppHeader";
-import Triangle from "../../../components/ui/shapes/Triangle";
 
-const CategoryItemsScreen = ({ route }) => {
+type CategoryItemsScreenProps = RootDrawerScreenProps<"CategoryItem">;
+
+const CategoryItemsScreen = ({ route }: CategoryItemsScreenProps) => {
   const { cid } = route.params;
   return (
     <>
       <BasicAppHeader title={`Category Name ${cid}`} />
 
-      <View className="px-8 py-10">
-        <Text className="text-2xl font-bold">Category Name {cid}</Text>
-      </View>
+      <Text className="px-8 py-8 text-3xl font-aeonisBold">
+        Category Name {cid}
+      </Text>
+
       <ScrollView>
         {Array(5)
           .fill(0)
@@ -70,13 +72,15 @@ const CategoryItem = ({ duration }: CategoryItemProps) => {
 
       <View className="relative">
         <View className=" flex-row justify-between px-8 py-4 items-center ">
-          <Text className="font-bold text-xl pb-2">Title of the content</Text>
-          <View className="flex-row items-center">
+          <Text className="font-aeonisBold text-2xl">Title of the content</Text>
+          <View className="flex-row items-center space-x-1">
             <ClockIcon
               size={30}
               color={"#aaa"}
             />
-            <Text className="text-neutral-500">{duration}</Text>
+            <Text className="text-neutral-500 font-montserrat uppercase">
+              {duration}
+            </Text>
           </View>
         </View>
         {detailShown ? (
@@ -93,7 +97,9 @@ const CategoryItem = ({ duration }: CategoryItemProps) => {
           className={clsx({
             hidden: detailShown,
           })}>
-          <Text className="px-8 text-accent text-xl font-bold">Details</Text>
+          <Text className="px-8 text-accent text-xl font-aeonisBold">
+            Details
+          </Text>
         </Pressable>
       </View>
 
@@ -117,7 +123,9 @@ const CategoryDetails = ({
       className="absolute w-full top-full pt-10 pb-20 px-8 overflow-hidden"
       style={styles.popover}>
       <View className="flex-row  justify-between">
-        <Text className="text-2xl text-white mb-5">{title}</Text>
+        <Text className="text-2xl text-white mb-5 font-aeonisMedium">
+          {title}
+        </Text>
         <Pressable
           onPress={closeDetail}
           className="">
@@ -127,7 +135,7 @@ const CategoryDetails = ({
           />
         </Pressable>
       </View>
-      <Text className="text-sm text-white">{details}</Text>
+      <Text className="text-sm text-white font-aeonisMedium">{details}</Text>
       <View className="absolute -top-1 left-12">
         <Triangle />
       </View>

@@ -1,7 +1,5 @@
-import { View, TextInput, Image, Text } from "react-native";
-import { MagnifyingGlassIcon } from "react-native-heroicons/solid";
-import MenuButton from "../ui/button/MenuButton";
-import SearchBar from "../inputs/SearchBar";
+import SearchBar from "@/components/inputs/SearchBar";
+import { View } from "react-native";
 import BasicAppBar from "./BasicAppBar";
 
 type AppHeaderProps = {

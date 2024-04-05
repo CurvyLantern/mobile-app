@@ -1,6 +1,6 @@
-import { View, Text, Image } from "react-native";
+import MenuButton from "@/components/ui/button/MenuButton";
 import React from "react";
-import MenuButton from "../ui/button/MenuButton";
+import { Image, Text, View } from "react-native";
 
 type AppBarProps = { title: string };
 const BasicAppBar = ({ title }: AppBarProps) => {
@@ -8,7 +8,7 @@ const BasicAppBar = ({ title }: AppBarProps) => {
     <View className="px-14 py-9 flex-row items-center border-b-2 border-neutral-200">
       <View>
         <Image
-          source={require("../../assets/logo/logo-small.png")}
+          source={require("@@/assets/logo/logo-small.png")}
           style={{
             objectFit: "contain",
             width: 52,
@@ -18,7 +18,7 @@ const BasicAppBar = ({ title }: AppBarProps) => {
       </View>
 
       <View className="mx-auto">
-        <Text className="text-[27px] font-bold font-aeonis">{title}</Text>
+        <Text className="text-[27px] font-aeonisBold">{title}</Text>
       </View>
 
       <MenuButton />

@@ -1,10 +1,12 @@
 import { useCallback, useState } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
-import ThemeConfig from "../../../constants/myTheme";
+import ThemeConfig from "@/constants/myTheme";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ArrowLeftIcon } from "react-native-heroicons/solid";
+import { LoginStackScreenProps } from "@/types/navigation.types";
+type RegisterFormProps = LoginStackScreenProps<"RegisterForm">;
 
-const RegisterForm = ({ navigation }) => {
+const RegisterForm = ({ navigation }: RegisterFormProps) => {
   const onGoBack = useCallback(() => {
     navigation.goBack();
   }, []);

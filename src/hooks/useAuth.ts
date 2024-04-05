@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
-import React, { useCallback, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+
+export type UserType = {
+  name: string;
+} | null;
 
 const useAuth = () => {
   const { navigate } = useNavigation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<UserType>(null);
   const login = useCallback(async () => {
     setIsLoggedIn(true);
     setUser({ name: "Lana D Rhodes" });

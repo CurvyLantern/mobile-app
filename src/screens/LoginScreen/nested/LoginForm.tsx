@@ -1,11 +1,13 @@
 import { useCallback, useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
-import ThemeConfig from "../../../constants/myTheme";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { ArrowLeftIcon } from "react-native-heroicons/solid";
-import { useAuthContext } from "../../../contexts/AuthContext";
+import ThemeConfig from "@/constants/myTheme";
+import { useAuthContext } from "@/contexts/AuthContext";
+import { LoginStackScreenProps } from "@/types/navigation.types";
 
-const LoginForm = ({ navigation }) => {
+type LoginFormProps = LoginStackScreenProps<"LoginForm">;
+
+const LoginForm = ({ navigation }: LoginFormProps) => {
   const { isLoggedIn, login } = useAuthContext();
   const onGoBack = useCallback(() => {
     navigation.goBack();

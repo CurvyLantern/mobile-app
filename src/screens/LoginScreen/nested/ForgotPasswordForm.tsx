@@ -1,10 +1,12 @@
+import ThemeConfig from "@/constants/myTheme";
+import { LoginStackScreenProps } from "@/types/navigation.types";
 import { useCallback, useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
-import ThemeConfig from "../../../constants/myTheme";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { ArrowLeftIcon } from "react-native-heroicons/solid";
 
-const ForgotPasswordForm = ({ navigation }) => {
+type ForgotPasswordFormProps = LoginStackScreenProps<"ForgotPasswordForm">;
+
+const ForgotPasswordForm = ({ navigation }: ForgotPasswordFormProps) => {
   const onGoBack = useCallback(() => {
     navigation.goBack();
   }, []);

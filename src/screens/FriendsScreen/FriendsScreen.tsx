@@ -1,46 +1,31 @@
-import {
-  View,
-  Text,
-  Pressable,
-  Image,
-  ImageSourcePropType,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-} from "react-native";
-import React, { useState } from "react";
-import BasicAppHeader from "../../../components/headers/BasicAppHeader";
-import BasicAppBar from "../../../components/headers/BasicAppBar";
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  PhoneIcon,
-  PlusIcon,
-} from "react-native-heroicons/solid";
-import SearchBar from "../../../components/inputs/SearchBar";
+import FriendListItem from "@/components/FriendListItem";
+import BasicAppBar from "@/components/headers/BasicAppBar";
+import SearchBar from "@/components/inputs/SearchBar";
+import React from "react";
+import { Pressable, ScrollView, Text, View } from "react-native";
+import { ChevronLeftIcon, PlusIcon } from "react-native-heroicons/solid";
 
-import Triangle from "../../../components/ui/shapes/Triangle";
-
+const DEFAULT_IMG = require("@@/assets/images/avatars/avatar1.png");
 const FriendList = [
   {
     id: "a",
     username: "Lana Davidson",
-    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
+    imgUrl: DEFAULT_IMG,
   },
   {
     id: "b",
     username: "Lana Davidson2",
-    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
+    imgUrl: DEFAULT_IMG,
   },
   {
     id: "c",
     username: "Lana Davidson3",
-    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
+    imgUrl: DEFAULT_IMG,
   },
   {
     id: "d",
     username: "Lana Davidson4",
-    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
+    imgUrl: DEFAULT_IMG,
   },
 ];
 
@@ -96,71 +81,6 @@ const FriendsScreen = () => {
 
 const ItemSeparator = () => {
   return <View className="h-1 bg-accent"></View>;
-};
-
-type FriendListItemProps = {
-  id: string;
-  username: string;
-  imgUrl: any;
-};
-const FriendListItem = ({ id, username, imgUrl }: FriendListItemProps) => {
-  const [detailsShown, setDetailsShown] = useState(false);
-  const onToggleDetails = () => {
-    setDetailsShown((p) => !p);
-  };
-  return (
-    <Pressable onPress={onToggleDetails}>
-      <View className="flex-row space-x-5 items-center py-4">
-        <View className="w-16 h-16">
-          <Image
-            source={imgUrl}
-            className="w-full aspect-square rounded-full object-contain"
-          />
-        </View>
-        <Text className="text-2xl font-bold mr-auto">{username}</Text>
-
-        <View className=" ">
-          <ChevronDownIcon
-            size={30}
-            color={"#3FB0DB"}
-          />
-        </View>
-      </View>
-
-      {detailsShown ? (
-        <FriendDetails
-          company="Company Name"
-          email="email@company.com"
-          phone="0601234567"
-        />
-      ) : null}
-    </Pressable>
-  );
-};
-
-type FriendDetailsProps = {
-  company: string;
-  email: string;
-  phone: string;
-};
-const FriendDetails = ({ company, email, phone }: FriendDetailsProps) => {
-  return (
-    <View className="w-full py-10 px-8 overflow-hidden bg-darkBlue bg-opacity-90">
-      <Text className="text-2xl pb-3 font-bold text-white">{company}</Text>
-      <Text className="text-2xl pb-3 text-white">{email}</Text>
-      <View className="flex-row items-center space-x-5">
-        <Text className="text-2xl text-accent">{phone}</Text>
-        <PhoneIcon
-          size={20}
-          color={"#3FB0DB"}
-        />
-      </View>
-
-      <View className="absolute -top-1 left-12">
-        <Triangle />
-      </View>
-    </View>
-  );
 };
 
 export default FriendsScreen;

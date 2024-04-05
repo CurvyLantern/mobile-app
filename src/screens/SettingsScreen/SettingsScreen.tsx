@@ -1,17 +1,36 @@
-import {
-  View,
-  Text,
-  Pressable,
-  Button,
-  Image,
-  StyleSheet,
-  TextInput,
-  PixelRatio,
-} from "react-native";
 import React, { useCallback, useState } from "react";
-import * as ImagePicker from "expo-image-picker";
-import { PhotoIcon } from "react-native-heroicons/solid";
+import { Pressable, Text, TextInput, View } from "react-native";
+
 import { useNavigation } from "@react-navigation/native";
+import PhotoPicker from "@/components/picker/PhotoPicker";
+
+type ProfileInputProps = {
+  title: string;
+  placeholder: string;
+  defaultValue: string;
+  secure?: boolean;
+};
+const ProfileInput = ({
+  title,
+  placeholder,
+  defaultValue,
+  secure,
+}: ProfileInputProps) => {
+  const [v, setV] = useState(defaultValue ? defaultValue : "");
+  return (
+    <View className="pt-5">
+      <Text className="text-basicGrey">{title}</Text>
+      <TextInput
+        className="w-full py-2 text-lg border-b-2 border-accent "
+        onChangeText={setV}
+        value={v}
+        placeholder={placeholder}
+        keyboardType="web-search"
+        secureTextEntry={!!secure}
+      />
+    </View>
+  );
+};
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
@@ -73,80 +92,5 @@ const SettingsScreen = () => {
     </View>
   );
 };
-
-type ProfileInputProps = {
-  title: string;
-  placeholder: string;
-  defaultValue: string;
-  secure?: boolean;
-};
-const ProfileInput = ({
-  title,
-  placeholder,
-  defaultValue,
-  secure,
-}: ProfileInputProps) => {
-  const [v, setV] = useState(defaultValue ? defaultValue : "");
-  return (
-    <View className="pt-5">
-      <Text className="text-basicGrey">{title}</Text>
-      <TextInput
-        className="w-full py-2 text-lg border-b-2 border-accent "
-        onChangeText={setV}
-        value={v}
-        placeholder={placeholder}
-        keyboardType="web-search"
-        secureTextEntry={!!secure}
-      />
-    </View>
-  );
-};
-
-const PhotoPicker = () => {
-  const [image, setImage] = useState(null);
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
-  return (
-    <Pressable onPress={pickImage}>
-      <View style={styles.imageWrapper}>
-        <Image source={{ uri: image, width: 150, height: 150 }} />
-
-        <View className="absolute top-0 right-0">
-          <PhotoIcon
-            size={50}
-            color={"#fff"}
-          />
-        </View>
-      </View>
-    </Pressable>
-  );
-};
-
-const styles = StyleSheet.create({
-  imageWrapper: {
-    width: 150,
-    height: 150,
-    borderRadius: 150 / 2,
-    position: "relative",
-    alignSelf: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-});
 
 export default SettingsScreen;

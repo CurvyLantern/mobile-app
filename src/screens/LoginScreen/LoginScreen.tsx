@@ -1,17 +1,19 @@
 import { Image, ImageBackground, Pressable, Text, View } from "react-native";
 
-import { Bars4Icon as IconBar } from "react-native-heroicons/solid";
-import { RootDrawerScreenProps } from "../../types/navigation.types";
-import useAuth from "../../hooks/useAuth";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import useAuth from "@/hooks/useAuth";
+import {
+  LoginStackParamList,
+  RootDrawerScreenProps,
+} from "@/types/navigation.types";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ForgotPasswordForm from "./nested/ForgotPasswordForm";
 import LoginForm from "./nested/LoginForm";
 import RegisterForm from "./nested/RegisterForm";
-import ForgotPasswordForm from "./nested/ForgotPasswordForm";
+import SignInOptions from "./nested/SignInOptions";
 
 type LoginScreenProps = RootDrawerScreenProps<"Login">;
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<LoginStackParamList>();
 
 const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const { login } = useAuth();
@@ -75,43 +77,6 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
         </View>
       </View>
     </ImageBackground>
-  );
-};
-
-const SignInOptions = ({ navigation }) => {
-  return (
-    <View className=" container space-y-8 mt-auto pb-24">
-      <View className=" ">
-        <Pressable
-          onPress={() => {
-            navigation.navigate("LoginForm");
-          }}
-          className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
-          <Text className="text-white font-semibold text-[28px]">Sign In</Text>
-        </Pressable>
-      </View>
-
-      <View>
-        <Pressable
-          onPress={() => {
-            navigation.navigate("RegisterForm");
-          }}
-          className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
-          <Text className="text-white font-semibold text-[28px]">Register</Text>
-        </Pressable>
-      </View>
-
-      <View>
-        <Pressable
-          onPress={() => {
-            navigation.navigate("ForgotPasswordForm");
-          }}>
-          <Text className="text-center text-secondary text-xl">
-            Forgot Password ?
-          </Text>
-        </Pressable>
-      </View>
-    </View>
   );
 };
 

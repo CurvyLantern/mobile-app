@@ -1,23 +1,20 @@
 import { PropsWithChildren, useCallback, useState } from "react";
 import {
-  View,
-  Text,
+  FlatList,
   Image,
-  TextInput,
   Pressable,
   ScrollView,
-  FlatList,
   StyleSheet,
+  Text,
+  View,
 } from "react-native";
 
-import { MagnifyingGlassIcon } from "react-native-heroicons/solid";
-import MenuButton from "../../../components/ui/button/MenuButton";
-import { fontNames } from "../../hooks/useCustomFont";
-import { cs } from "../../../libs/utils";
+import BasicAppHeader from "@/components/headers/BasicAppHeader";
+import ThemeConfig from "@/constants/myTheme";
+import { cs } from "@@/libs/utils";
+import { useLinkProps } from "@react-navigation/native";
 import clsx from "clsx";
-import { Path, Svg, Text as SvgText } from "react-native-svg";
-import { Link, useLinkProps } from "@react-navigation/native";
-import BasicAppHeader from "../../../components/headers/BasicAppHeader";
+import { Path, Svg } from "react-native-svg";
 
 const filters = [
   "fitler1 name",
@@ -66,6 +63,7 @@ const Categories = [
 ];
 
 const CategoryScreen = () => {
+  const theme = ThemeConfig();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState(filters[0]);
   const [sortBy, setSortBy] = useState(sortOptions[0]);
@@ -83,17 +81,10 @@ const CategoryScreen = () => {
 
   return (
     <>
-      <BasicAppHeader title="Category" />
+      <BasicAppHeader title="Categories" />
 
-      <View className="px-8 pt-12 pb-9">
-        <Text
-          className="text-4xl font-bold"
-          style={{
-            fontFamily: fontNames.aeonisMedium,
-            fontSize: 40,
-          }}>
-          Category
-        </Text>
+      <View className="px-8 pt-8 pb-9">
+        <Text className="text-4xl font-aeonisBold text-primary">Category</Text>
       </View>
 
       <View>
@@ -114,7 +105,7 @@ const CategoryScreen = () => {
                   <Text
                     className={clsx([
                       f ? "text-white" : "text-basicGrey",
-                      "text-lg font-medium",
+                      "text-lg font-montserrat font-bold",
                     ])}>
                     {filterName}
                   </Text>
@@ -126,12 +117,7 @@ const CategoryScreen = () => {
       </View>
 
       <View className="px-8 pt-8 pb-6">
-        <Text
-          className="text-4xl font-bold"
-          style={{
-            fontFamily: fontNames.aeonisMedium,
-            fontSize: 23,
-          }}>
+        <Text className="text-primary text-4xl font-bold font-aeonisMedium text-[23px]">
           Sort By
         </Text>
       </View>
@@ -143,14 +129,14 @@ const CategoryScreen = () => {
               key={sortName}
               onPress={onSortPress(sortName)}
               className={cs({
-                "bg-white border-2  rounded-lg py-2 px-4 items-center min-w- max-w-[144px]":
+                "bg-white border-2 border-primary  rounded-lg py-2 px-4 items-center min-w- max-w-[144px]":
                   true,
                 "bg-accent border-0": sortBy === sortName,
               })}>
               <Text
                 className={cs(
-                  sortBy === sortName ? "text-white" : "text-black",
-                  "capitalize"
+                  sortBy === sortName ? "text-white" : "text-primary",
+                  "capitalize font-montserrat font-bold text-lg"
                 )}>
                 {sortName}
               </Text>
@@ -215,8 +201,12 @@ const CategoryItem = ({ title, uri, id, subtitle }: ItemProps) => {
           />
         </View>
         <View className="pl-6 justify-center ">
-          <Text className="text-2xl font-bold">{title}</Text>
-          <Text className="text-sm">{subtitle}</Text>
+          <Text className="text-2xl  font-aeonisBold text-primary">
+            {title}
+          </Text>
+          <Text className="text-sm font-montserrat text-basicGrey">
+            {subtitle}
+          </Text>
         </View>
 
         <View className="ml-auto  flex-row items-center space-x-2">
