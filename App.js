@@ -1,14 +1,14 @@
 import "react-native-gesture-handler";
 
-import RootLayout from "./layouts/RootLayout";
+import RootLayout from "./src/layouts/RootLayout";
 
 
 import { NavigationContainer } from "@react-navigation/native";
 import { useLayoutEffect } from "react";
-import { useCustomFont } from "./hooks/useCustomFont";
+import { useCustomFont } from "./src/hooks/useCustomFont";
 import { StatusBar } from "react-native";
 import SafeAreaContainer from "./components/SafeAreaContainer";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./src/contexts/AuthContext";
 
 export default function App() {
   const { fontsLoaded, onLayoutRootView } = useCustomFont();

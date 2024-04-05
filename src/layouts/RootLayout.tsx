@@ -7,20 +7,21 @@ import {
   createDrawerNavigator,
 } from "@react-navigation/drawer";
 
-import LoginPage from "../pages/LoginPage";
-import CategoryPage from "../pages/CategoryPage";
+import LoginScreen from "../screens/LoginScreen/LoginScreen";
+import CategoryScreen from "../screens/CategoryScreen/CategoryScreen";
 import {
   RootDrawerParamList,
   RootDrawerScreenProps,
 } from "../types/navigation.types";
-import CategoryItemsPage from "../pages/CategoryItemsPage";
-import FriendsPage from "../pages/FriendsPage";
-import ProfilePage from "../pages/ProfilePage";
+import CategoryItemsScreen from "../screens/CategoryScreen/CategoryItemsScreen";
+import FriendsScreen from "../screens/FriendsScreen/FriendsScreen";
+import SettingsScreen from "../screens/SettingsScreen/SettingsScreen";
 import { Image, Linking, View, Text, Pressable } from "react-native";
 import {
   AdjustmentsHorizontalIcon,
   ArrowLeftStartOnRectangleIcon,
   HomeIcon,
+  UserIcon,
 } from "react-native-heroicons/solid";
 import { useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -45,12 +46,12 @@ const RootLayout = () => {
       backBehavior="history">
       <Drawer.Screen
         name="Category"
-        component={CategoryPage}
+        component={CategoryScreen}
       />
 
       <Drawer.Screen
         name="CategoryItem"
-        component={CategoryItemsPage}
+        component={CategoryItemsScreen}
         options={{
           drawerItemStyle: { display: "none" },
         }}
@@ -58,16 +59,17 @@ const RootLayout = () => {
 
       <Drawer.Screen
         name="Friends"
-        component={FriendsPage}
+        component={FriendsScreen}
       />
 
       <Drawer.Screen
         name="Profile"
-        component={ProfilePage}
+        component={SettingsScreen}
       />
+
       <Drawer.Screen
         name="Login"
-        component={LoginPage}
+        component={LoginScreen}
         options={{}}
       />
 
@@ -92,34 +94,49 @@ const CustomDrawerContent = (props) => {
             className="object-contain w-full h-full rounded-full"
             width={112}
             height={112}
-            source={require("../assets/images/avatars/avatar1.png")}
+            source={require("../../assets/images/avatars/avatar1.png")}
           />
         </View>
         <Text className="text-3xl font-bold text-center">Name Surname</Text>
       </View>
-      <CustomDrawerItem
-        Icon={HomeIcon}
-        title="Home"
-        onPress={() => {
-          navigation.navigate("Category");
-        }}
-      />
-      <CustomDrawerItem
-        Icon={AdjustmentsHorizontalIcon}
-        title="Settings"
-        onPress={() => {
-          navigation.navigate("Profile");
-        }}
-      />
-      <CustomDrawerItem
-        Icon={ArrowLeftStartOnRectangleIcon}
-        title="Logout"
-        onPress={() => {
-          logout().then((res) => {
-            navigation.navigate("Login");
-          });
-        }}
-      />
+
+      {isLoggedIn ? (
+        <>
+          <CustomDrawerItem
+            Icon={AdjustmentsHorizontalIcon}
+            title="Settings"
+            onPress={() => {
+              navigation.navigate("Profile");
+            }}
+          />
+          <CustomDrawerItem
+            Icon={ArrowLeftStartOnRectangleIcon}
+            title="Logout"
+            onPress={() => {
+              logout().then((res) => {
+                navigation.navigate("Login");
+              });
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <CustomDrawerItem
+            Icon={HomeIcon}
+            title="Home"
+            onPress={() => {
+              navigation.navigate("Category");
+            }}
+          />
+          <CustomDrawerItem
+            Icon={UserIcon}
+            title="Sign In"
+            onPress={() => {
+              navigation.navigate("LoginForm");
+            }}
+          />
+        </>
+      )}
     </DrawerContentScrollView>
   );
 };

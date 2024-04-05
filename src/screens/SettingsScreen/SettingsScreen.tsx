@@ -13,7 +13,7 @@ import * as ImagePicker from "expo-image-picker";
 import { PhotoIcon } from "react-native-heroicons/solid";
 import { useNavigation } from "@react-navigation/native";
 
-const ProfilePage = () => {
+const SettingsScreen = () => {
   const navigation = useNavigation();
   const onCancel = useCallback(() => {
     navigation.goBack();
@@ -149,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfilePage;
+export default SettingsScreen;

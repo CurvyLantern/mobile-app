@@ -11,13 +11,13 @@ import {
 } from "react-native";
 
 import { MagnifyingGlassIcon } from "react-native-heroicons/solid";
-import MenuButton from "../components/ui/button/MenuButton";
-import { fontNames } from "../hooks/useCustomFont";
-import { cs } from "../libs/utils";
+import MenuButton from "../../../components/ui/button/MenuButton";
+import { fontNames } from "../../hooks/useCustomFont";
+import { cs } from "../../../libs/utils";
 import clsx from "clsx";
 import { Path, Svg, Text as SvgText } from "react-native-svg";
 import { Link, useLinkProps } from "@react-navigation/native";
-import BasicAppHeader from "../components/headers/BasicAppHeader";
+import BasicAppHeader from "../../../components/headers/BasicAppHeader";
 
 const filters = [
   "fitler1 name",
@@ -33,39 +33,39 @@ const Categories = [
     id: "a",
     title: "Category 1",
     subtitle: "Accompanying text",
-    uri: require("../assets/baby/baby-1.jpg"),
+    uri: require("../../../assets/baby/baby-1.jpg"),
   },
   {
     id: "b",
     title: "Category 2",
     subtitle: "Accompanying text",
 
-    uri: require("../assets/baby/baby-1.jpg"),
+    uri: require("../../../assets/baby/baby-1.jpg"),
   },
   {
     id: "c",
     title: "Category 3",
     subtitle: "Accompanying text",
 
-    uri: require("../assets/baby/baby-1.jpg"),
+    uri: require("../../../assets/baby/baby-1.jpg"),
   },
   {
     id: "d",
     title: "Category 4",
     subtitle: "Accompanying text",
 
-    uri: require("../assets/baby/baby-1.jpg"),
+    uri: require("../../../assets/baby/baby-1.jpg"),
   },
   {
     id: "e",
     title: "Category 4",
     subtitle: "Accompanying text",
 
-    uri: require("../assets/baby/baby-1.jpg"),
+    uri: require("../../../assets/baby/baby-1.jpg"),
   },
 ];
 
-const CategoryPage = () => {
+const CategoryScreen = () => {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState(filters[0]);
   const [sortBy, setSortBy] = useState(sortOptions[0]);
@@ -247,4 +247,4 @@ const OctaveSvg = ({ children }: PropsWithChildren) => {
 
 const styles = StyleSheet.create({});
 
-export default CategoryPage;
+export default CategoryScreen;

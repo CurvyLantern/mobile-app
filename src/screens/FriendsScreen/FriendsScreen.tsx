@@ -9,42 +9,42 @@ import {
   FlatList,
 } from "react-native";
 import React, { useState } from "react";
-import BasicAppHeader from "../components/headers/BasicAppHeader";
-import BasicAppBar from "../components/headers/BasicAppBar";
+import BasicAppHeader from "../../../components/headers/BasicAppHeader";
+import BasicAppBar from "../../../components/headers/BasicAppBar";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
   PhoneIcon,
   PlusIcon,
 } from "react-native-heroicons/solid";
-import SearchBar from "../components/inputs/SearchBar";
+import SearchBar from "../../../components/inputs/SearchBar";
 
-import Triangle from "../components/ui/shapes/Triangle";
+import Triangle from "../../../components/ui/shapes/Triangle";
 
 const FriendList = [
   {
     id: "a",
     username: "Lana Davidson",
-    imgUrl: require("../assets/images/avatars/avatar1.png"),
+    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
   },
   {
     id: "b",
     username: "Lana Davidson2",
-    imgUrl: require("../assets/images/avatars/avatar1.png"),
+    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
   },
   {
     id: "c",
     username: "Lana Davidson3",
-    imgUrl: require("../assets/images/avatars/avatar1.png"),
+    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
   },
   {
     id: "d",
     username: "Lana Davidson4",
-    imgUrl: require("../assets/images/avatars/avatar1.png"),
+    imgUrl: require("../../../assets/images/avatars/avatar1.png"),
   },
 ];
 
-const FriendsPage = () => {
+const FriendsScreen = () => {
   return (
     <>
       <BasicAppBar title="Friends" />
@@ -163,4 +163,4 @@ const FriendDetails = ({ company, email, phone }: FriendDetailsProps) => {
   );
 };
 
-export default FriendsPage;
+export default FriendsScreen;

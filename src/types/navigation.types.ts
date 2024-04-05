@@ -11,7 +11,9 @@ export type RootDrawerParamList = {
   // Home: NavigatorScreenParams<HomeTabParamList>;
   // PostDetails: { id: string };
   // NotFound: undefined;
-  Login: undefined;
+  Login: {
+    screen: "LoginForm";
+  };
   Category: undefined;
   CategoryItem: { cid: string };
   Friends: undefined;

@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useDebugValue, useState } from "react";
-import SafeAreaContainer from "../components/SafeAreaContainer";
+import SafeAreaContainer from "../../../components/SafeAreaContainer";
 import {
   ClockIcon,
   XMarkIcon as CrossIcon,
@@ -15,10 +15,10 @@ import {
 } from "react-native-heroicons/solid";
 import { Path, Svg } from "react-native-svg";
 import clsx from "clsx";
-import BasicAppHeader from "../components/headers/BasicAppHeader";
-import Triangle from "../components/ui/shapes/Triangle";
+import BasicAppHeader from "../../../components/headers/BasicAppHeader";
+import Triangle from "../../../components/ui/shapes/Triangle";
 
-const CategoryItemsPage = ({ route }) => {
+const CategoryItemsScreen = ({ route }) => {
   const { cid } = route.params;
   return (
     <>
@@ -64,7 +64,7 @@ const CategoryItem = ({ duration }: CategoryItemProps) => {
       <View className="w-full aspect-video">
         <Image
           className=" h-full object-contain w-full"
-          source={require("../assets/baby/baby-1.jpg")}
+          source={require("../../../assets/baby/baby-1.jpg")}
         />
       </View>
 
@@ -147,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoryItemsPage;
+export default CategoryItemsScreen;
