@@ -1,9 +1,12 @@
-import BasicAppHeader from "@/components/headers/BasicAppHeader";
+import BasicAppBar from "@/components/headers/BasicAppBar";
+import SearchBar from "@/components/inputs/SearchBar";
 import Triangle from "@/components/ui/shapes/Triangle";
 import { RootDrawerScreenProps } from "@/types/navigation.types";
+import { getOrientation } from "@/utils/utils";
 import clsx from "clsx";
 import React, { useState } from "react";
 import {
+  Dimensions,
   Image,
   Pressable,
   ScrollView,
@@ -16,20 +19,43 @@ import {
   XMarkIcon as CrossIcon,
   EllipsisHorizontalIcon as ThreeDotsIcon,
 } from "react-native-heroicons/solid";
+import { FlatGrid } from "react-native-super-grid";
 
 type CategoryItemsScreenProps = RootDrawerScreenProps<"CategoryItem">;
 
 const CategoryItemsScreen = ({ route }: CategoryItemsScreenProps) => {
   const { cid } = route.params;
+  const isLandscape = getOrientation() === "landscape";
+  const itemW = isLandscape ? Dimensions.get("window").width / 3.5 : undefined;
+  // const itemW = 325;
   return (
     <>
-      <BasicAppHeader title={`Category Name ${cid}`} />
+      <BasicAppBar title={`Category Name ${cid}`} />
 
-      <Text className="px-8 py-8 text-3xl font-aeonisBold">
-        Category Name {cid}
-      </Text>
+      <View
+        className={clsx({
+          " container py-8": true,
+          "flex-row-reverse": isLandscape,
+        })}>
+        <View
+          className={clsx({
+            "flex-1": isLandscape,
+          })}>
+          <SearchBar />
+        </View>
 
-      <ScrollView>
+        <View
+          className={clsx({
+            "flex-1": isLandscape,
+            "pt-4": !isLandscape,
+          })}>
+          <Text className="text-3xl   font-aeonisBold text-primary">
+            Category Name {cid}
+          </Text>
+        </View>
+      </View>
+
+      {/* <ScrollView>
         {Array(5)
           .fill(0)
           .map((_, idx) => {
@@ -40,7 +66,35 @@ const CategoryItemsScreen = ({ route }: CategoryItemsScreenProps) => {
               />
             );
           })}
-      </ScrollView>
+      </ScrollView> */}
+      {/* <FlatList
+        numColumns={3}
+        data={Array(5).fill(0)}
+        renderItem={() => <CategoryItem duration="15 min" />}
+        keyExtractor={(_, idx) => String(idx)}
+      /> */}
+
+      {isLandscape ? (
+        <FlatGrid
+          itemDimension={itemW}
+          data={Array(12).fill(0)}
+          renderItem={({ item }) => <CategoryItem duration="15 min" />}
+          keyExtractor={(_, idx) => String(idx)}
+        />
+      ) : (
+        <ScrollView>
+          {Array(5)
+            .fill(0)
+            .map((_, idx) => {
+              return (
+                <CategoryItem
+                  duration={"15 min"}
+                  key={idx}
+                />
+              );
+            })}
+        </ScrollView>
+      )}
     </>
   );
 };
@@ -55,6 +109,8 @@ const CategoryItem = ({ duration }: CategoryItemProps) => {
     setDetailShown((p) => !p);
   };
 
+  const isPortrait = getOrientation() === "portrait";
+
   return (
     <View className="pb-12">
       <View className="items-end px-8">
@@ -68,6 +124,16 @@ const CategoryItem = ({ duration }: CategoryItemProps) => {
           className=" h-full object-contain w-full"
           source={require("../../../assets/baby/baby-1.jpg")}
         />
+
+        {detailShown && !isPortrait ? (
+          <CategoryDetails
+            closeDetail={toggleDetails}
+            details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
+                natus, dolorum minima magni saepe nobis perspiciatis aperiam totam
+                tempora in."
+            title="Description"
+          />
+        ) : null}
       </View>
 
       <View className="relative">
@@ -83,7 +149,7 @@ const CategoryItem = ({ duration }: CategoryItemProps) => {
             </Text>
           </View>
         </View>
-        {detailShown ? (
+        {detailShown && isPortrait ? (
           <CategoryDetails
             closeDetail={toggleDetails}
             details="Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
@@ -95,7 +161,7 @@ const CategoryItem = ({ duration }: CategoryItemProps) => {
         <Pressable
           onPress={toggleDetails}
           className={clsx({
-            hidden: detailShown,
+            hidden: detailShown && isPortrait,
           })}>
           <Text className="px-8 text-accent text-xl font-aeonisBold">
             Details
@@ -118,9 +184,13 @@ const CategoryDetails = ({
   title,
   closeDetail,
 }: CategoryDetailsProps) => {
+  const isLandscape = getOrientation() === "landscape";
   return (
     <View
-      className="absolute w-full top-full pt-10 pb-20 px-8 overflow-hidden"
+      className={clsx([
+        "absolute w-full  pt-10 pb-20 px-8 overflow-hidden",
+        isLandscape ? "top-0" : "top-full",
+      ])}
       style={styles.popover}>
       <View className="flex-row  justify-between">
         <Text className="text-2xl text-white mb-5 font-aeonisMedium">
@@ -150,7 +220,7 @@ const styles = StyleSheet.create({
 
   popover: {
     // top: "100%",
-    zIndex: 10,
+    zIndex: 1000,
     backgroundColor: "rgba(17,27,47,0.9)",
   },
 });

@@ -22,7 +22,10 @@ const PhotoPicker = () => {
   return (
     <Pressable onPress={pickImage}>
       <View style={styles.imageWrapper}>
-        <Image source={{ uri: image ? image : "", width: 150, height: 150 }} />
+        <Image
+          className="rounded-full overflow-hidden"
+          source={{ uri: image ? image : undefined, width: 150, height: 150 }}
+        />
 
         <View className="absolute top-0 right-0">
           <PhotoIcon
@@ -46,7 +49,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 2,
+    borderWidth: 1,
+    borderColor: "#aaa",
+    // elevation: 2,
   },
 });
 export default PhotoPicker;

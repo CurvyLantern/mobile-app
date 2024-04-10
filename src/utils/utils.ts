@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export function hexToRgb(hex: string) {
   // Remove '#' if present
   hex = hex.replace(/^#/, "");
@@ -13,4 +15,13 @@ export function hexToRgb(hex: string) {
     g: g,
     b: b,
   };
+}
+
+export function getOrientation() {
+  let o: "portrait" | "landscape" = "portrait";
+  const { height, width } = Dimensions.get("window");
+  if (width > height) {
+    o = "landscape";
+  }
+  return o;
 }

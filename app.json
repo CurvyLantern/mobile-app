@@ -13,7 +13,7 @@
       "supportsTablet": true
     },
     "name": "neonatologie",
-    "orientation": "portrait",
+    "orientation": "default",
     "plugins": [
       [
         "expo-font",

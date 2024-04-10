@@ -1,6 +1,8 @@
 import FriendListItem from "@/components/FriendListItem";
 import BasicAppBar from "@/components/headers/BasicAppBar";
 import SearchBar from "@/components/inputs/SearchBar";
+import { getOrientation } from "@/utils/utils";
+import clsx from "clsx";
 import React from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { ChevronLeftIcon, PlusIcon } from "react-native-heroicons/solid";
@@ -30,6 +32,7 @@ const FriendList = [
 ];
 
 const FriendsScreen = () => {
+  const isLandscape = getOrientation() === "landscape";
   return (
     <>
       <BasicAppBar title="Friends" />
@@ -55,7 +58,11 @@ const FriendsScreen = () => {
         <SearchBar />
       </View>
 
-      <View className="container py-4  flex-1">
+      <View
+        className={clsx({
+          "container py-4  flex-1": true,
+          "max-w-[50%]": isLandscape,
+        })}>
         <ScrollView>
           {FriendList.map((friend, idx) => {
             return (

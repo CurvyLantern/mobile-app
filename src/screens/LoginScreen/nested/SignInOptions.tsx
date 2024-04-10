@@ -4,7 +4,7 @@ import { Pressable, Text, View } from "react-native";
 type SignInOptionsProps = LoginStackScreenProps<"SignInOptions">;
 const SignInOptions = ({ navigation }: SignInOptionsProps) => {
   return (
-    <View className="container space-y-8 mt-auto pb-24">
+    <View className="container  space-y-8 mt-auto pb-24 max-w-sm self-center">
       <View className=" ">
         <Pressable
           onPress={() => {

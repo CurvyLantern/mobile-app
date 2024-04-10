@@ -9,7 +9,7 @@ type FriendDetailsProps = {
 };
 const FriendDetails = ({ company, email, phone }: FriendDetailsProps) => {
   return (
-    <View className="w-full py-10 px-8 overflow-hidden bg-darkBlue bg-opacity-90">
+    <View className="w-96 py-10 px-8 overflow-hidden bg-darkBlue bg-opacity-90">
       <Text className="text-2xl pb-3 font-bold text-white">{company}</Text>
       <Text className="text-2xl pb-3 text-white">{email}</Text>
       <View className="flex-row items-center space-x-5">

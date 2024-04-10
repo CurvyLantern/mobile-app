@@ -49,6 +49,13 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
             }}
           />
           <CustomDrawerItem
+            Icon={AdjustmentsHorizontalIcon}
+            title="Friends"
+            onPress={() => {
+              navigation.navigate("Friends");
+            }}
+          />
+          <CustomDrawerItem
             Icon={ArrowLeftStartOnRectangleIcon}
             title="Logout"
             onPress={() => {

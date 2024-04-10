@@ -1,3 +1,4 @@
+import AuthFormContainer from "@/components/containers/AuthFormContainer";
 import ThemeConfig from "@/constants/myTheme";
 import { LoginStackScreenProps } from "@/types/navigation.types";
 import { useCallback, useState } from "react";
@@ -14,47 +15,53 @@ const ForgotPasswordForm = ({ navigation }: ForgotPasswordFormProps) => {
     <View
       style={styles.wrapper}
       className="h-full container  justify-center">
-      <Pressable
-        onPress={onGoBack}
-        className="flex-row items-center space-x-2 pb-10">
-        <ArrowLeftIcon
-          size={30}
-          color={"#ffffff"}
+      <AuthFormContainer>
+        <Pressable
+          onPress={onGoBack}
+          className="flex-row items-center space-x-2 pb-10">
+          <ArrowLeftIcon
+            size={30}
+            color={"#ffffff"}
+          />
+          <Text className="text-white">Go Back</Text>
+        </Pressable>
+
+        <ProfileInput
+          defaultValue=""
+          placeholder="Enter your email"
+          title="Email"
         />
-        <Text className="text-white">Go Back</Text>
-      </Pressable>
 
-      <ProfileInput
-        defaultValue=""
-        placeholder="Enter your email"
-        title="Email"
-      />
+        <View className="pt-10">
+          <Pressable className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
+            <Text className="text-white font-semibold text-[28px]">Search</Text>
+          </Pressable>
+        </View>
 
-      <View className="pt-10">
-        <Pressable className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
-          <Text className="text-white font-semibold text-[28px]">Search</Text>
-        </Pressable>
-      </View>
+        <View className="pt-10">
+          <Pressable
+            onPress={() => {
+              navigation.navigate("LoginForm");
+            }}
+            className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
+            <Text className="text-white font-semibold text-[28px]">
+              Sign In
+            </Text>
+          </Pressable>
+        </View>
 
-      <View className="pt-10">
-        <Pressable
-          onPress={() => {
-            navigation.navigate("LoginForm");
-          }}
-          className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
-          <Text className="text-white font-semibold text-[28px]">Sign In</Text>
-        </Pressable>
-      </View>
-
-      <View className="pt-10">
-        <Pressable
-          onPress={() => {
-            navigation.navigate("RegisterForm");
-          }}
-          className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
-          <Text className="text-white font-semibold text-[28px]">Register</Text>
-        </Pressable>
-      </View>
+        <View className="pt-10">
+          <Pressable
+            onPress={() => {
+              navigation.navigate("RegisterForm");
+            }}
+            className="w-full h-14 rounded-full border-2 border-white items-center justify-center">
+            <Text className="text-white font-semibold text-[28px]">
+              Register
+            </Text>
+          </Pressable>
+        </View>
+      </AuthFormContainer>
     </View>
   );
 };

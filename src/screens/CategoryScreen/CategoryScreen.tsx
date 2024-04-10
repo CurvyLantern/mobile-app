@@ -9,20 +9,15 @@ import {
   View,
 } from "react-native";
 
-import BasicAppHeader from "@/components/headers/BasicAppHeader";
+import BasicAppBar from "@/components/headers/BasicAppBar";
+import SearchBar from "@/components/inputs/SearchBar";
 import ThemeConfig from "@/constants/myTheme";
+import { getOrientation } from "@/utils/utils";
 import { cs } from "@@/libs/utils";
 import { useLinkProps } from "@react-navigation/native";
 import clsx from "clsx";
 import { Path, Svg } from "react-native-svg";
-
-const filters = [
-  "fitler1 name",
-  "filter2 name",
-  "filter3 name",
-  "filter4 name",
-  "filter5 name",
-];
+const filters = ["fitler1", "filter2", "filter3"];
 const sortOptions = ["popularity", "newest", "oldest"];
 
 const Categories = [
@@ -79,70 +74,88 @@ const CategoryScreen = () => {
     };
   }, []);
 
+  const isLandscape = getOrientation() === "landscape";
+
   return (
     <>
-      <BasicAppHeader title="Categories" />
+      <BasicAppBar title="Categories" />
 
-      <View className="px-8 pt-8 pb-9">
-        <Text className="text-4xl font-aeonisBold text-primary">Category</Text>
-      </View>
+      <View
+        className={clsx({
+          "bg-white flex-1 container": true,
+          "flex-row-reverse": isLandscape,
+        })}>
+        <View
+          className={clsx({
+            "pt-8": true,
+            "flex-1 ml-[8%]": isLandscape,
+          })}>
+          <SearchBar />
+        </View>
 
-      <View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}>
-          <View className="flex-row justify-between px-7 space-x-5">
-            {filters.map((filterName) => {
-              const f = filter === filterName;
+        <View style={{ flex: 1 }}>
+          <View className=" pt-8 pb-8">
+            <Text className="text-4xl font-aeonisBold text-primary">
+              Category
+            </Text>
+          </View>
+          <View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}>
+              <View className="flex-row justify-between  space-x-5">
+                {filters.map((filterName) => {
+                  const f = filter === filterName;
+                  return (
+                    <Pressable
+                      key={filterName}
+                      onPress={onFilterPress(filterName)}
+                      className={cs({
+                        "rounded-full px-1 items-center w-36 h-8": true,
+                        "bg-accent text-white": f,
+                      })}>
+                      <Text
+                        className={clsx([
+                          f ? "text-white" : "text-basicGrey",
+                          "text-lg font-montserrat font-bold",
+                        ])}>
+                        {filterName}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            </ScrollView>
+          </View>
+
+          <View className=" pt-6 pb-6">
+            <Text className="text-primary text-4xl font-aeonisBold text-[23px]">
+              Sort by
+            </Text>
+          </View>
+          <View className="flex-row pb-6 space-x-5">
+            {sortOptions.map((sortName) => {
               return (
                 <Pressable
-                  key={filterName}
-                  onPress={onFilterPress(filterName)}
+                  key={sortName}
+                  onPress={onSortPress(sortName)}
                   className={cs({
-                    "rounded-full px-1 items-center w-36 h-8": true,
-                    "bg-accent text-white": f,
+                    "bg-white border-2 border-primary  rounded-lg py-2 px-4 items-center min-w- max-w-[144px]":
+                      true,
+                    "bg-accent border-0": sortBy === sortName,
                   })}>
                   <Text
-                    className={clsx([
-                      f ? "text-white" : "text-basicGrey",
-                      "text-lg font-montserrat font-bold",
-                    ])}>
-                    {filterName}
+                    className={cs(
+                      sortBy === sortName ? "text-white" : "text-primary",
+                      "capitalize font-montserrat font-bold text-lg"
+                    )}>
+                    {sortName}
                   </Text>
                 </Pressable>
               );
             })}
           </View>
-        </ScrollView>
-      </View>
-
-      <View className="px-8 pt-8 pb-6">
-        <Text className="text-primary text-4xl font-bold font-aeonisMedium text-[23px]">
-          Sort By
-        </Text>
-      </View>
-
-      <View className="flex-row justify-between px-7 space-x-5">
-        {sortOptions.map((sortName) => {
-          return (
-            <Pressable
-              key={sortName}
-              onPress={onSortPress(sortName)}
-              className={cs({
-                "bg-white border-2 border-primary  rounded-lg py-2 px-4 items-center min-w- max-w-[144px]":
-                  true,
-                "bg-accent border-0": sortBy === sortName,
-              })}>
-              <Text
-                className={cs(
-                  sortBy === sortName ? "text-white" : "text-primary",
-                  "capitalize font-montserrat font-bold text-lg"
-                )}>
-                {sortName}
-              </Text>
-            </Pressable>
-          );
-        })}
+        </View>
       </View>
 
       {/* <FlatList
@@ -164,6 +177,8 @@ const CategoryScreen = () => {
       </ScrollView> */}
       <View className="flex-1 w-full container pt-14">
         <FlatList
+          numColumns={isLandscape ? 2 : 1}
+          columnWrapperStyle={isLandscape ? { gap: 60 } : false}
           contentContainerStyle={{ gap: 30 }}
           data={Categories}
           keyExtractor={(item) => item.id}
@@ -194,14 +209,20 @@ const CategoryItem = ({ title, uri, id, subtitle }: ItemProps) => {
   return (
     <Pressable onPress={onPress}>
       <View className="flex-row">
-        <View className="w-1/4 flex-row">
+        <View
+          style={{
+            width: "20%",
+          }}
+          className="flex-row">
           <Image
             source={uri}
             className="w-full aspect-square rounded-md"
           />
         </View>
-        <View className="pl-6 justify-center ">
-          <Text className="text-2xl  font-aeonisBold text-primary">
+        <View className="pl-6 justify-center mr-auto">
+          <Text
+            adjustsFontSizeToFit
+            className="text-2xl  font-aeonisBold text-primary">
             {title}
           </Text>
           <Text className="text-sm font-montserrat text-basicGrey">
@@ -209,7 +230,7 @@ const CategoryItem = ({ title, uri, id, subtitle }: ItemProps) => {
           </Text>
         </View>
 
-        <View className="ml-auto  flex-row items-center space-x-2">
+        <View className=" flex-row items-center space-x-2">
           <View className="relative items-center justify-center">
             <OctaveSvg />
             <Text className="text-white absolute">5</Text>
